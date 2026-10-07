@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Overtone — spectral analysis study">
+  <defs>
+    <linearGradient id="o-bg" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0"   stop-color="#0E0C22"/>
+      <stop offset=".55" stop-color="#0A0A0E"/>
+      <stop offset="1"   stop-color="#0B0B0D"/>
+    </linearGradient>
+    <linearGradient id="o-bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0"   stop-color="#2F6BFF" stop-opacity=".45"/>
+      <stop offset=".55" stop-color="#6D5BFF" stop-opacity=".95"/>
+      <stop offset="1"   stop-color="#B9AFFF" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="o-curve" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#46E3DC" stop-opacity=".2"/>
+      <stop offset=".5"  stop-color="#46E3DC" stop-opacity="1"/>
+      <stop offset="1"   stop-color="#46E3DC" stop-opacity=".2"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#o-bg)"/>
+
+  <g stroke="#F2F0ED" stroke-width="1" opacity=".08">
+    <line x1="0" y1="820" x2="1600" y2="820"/>
+    <line x1="0" y1="640" x2="1600" y2="640"/>
+    <line x1="0" y1="460" x2="1600" y2="460"/>
+    <line x1="0" y1="280" x2="1600" y2="280"/>
+  </g>
+
+  <!-- spectrum: one path, many strokes -->
+  <path fill="none" stroke="url(#o-bar)" stroke-width="13" stroke-linecap="butt"
+        d="M80 640V820 M114 560V820 M148 430V820 M182 300V820 M216 350V820 M250 480V820
+           M284 570V820 M318 390V820 M352 260V820 M386 320V820 M420 460V820 M454 540V820
+           M488 610V820 M522 490V820 M556 370V820 M590 425V820 M624 530V820 M658 600V820
+           M692 660V820 M726 570V820 M760 480V820 M794 520V820 M828 620V820 M862 670V820
+           M896 700V820 M930 630V820 M964 560V820 M998 590V820 M1032 660V820 M1066 710V820
+           M1100 730V820 M1134 680V820 M1168 630V820 M1202 650V820 M1236 700V820 M1270 740V820
+           M1304 760V820 M1338 720V820 M1372 690V820 M1406 710V820 M1440 740V820 M1474 760V820
+           M1508 750V820 M1542 770V820"/>
+
+  <!-- spectral envelope -->
+  <path fill="none" stroke="url(#o-curve)" stroke-width="2"
+        d="M80 640C148 430 216 350 284 570C352 260 420 460 488 610C556 370 624 530 692 660
+           C760 480 828 620 896 700C964 560 1032 660 1100 730C1168 630 1236 700 1304 760
+           C1372 690 1440 740 1508 750C1542 770 1542 770 1542 770"/>
+
+  <!-- fundamental markers -->
+  <g fill="#46E3DC">
+    <circle cx="182" cy="300" r="4.5"/>
+    <circle cx="352" cy="260" r="4.5"/>
+  </g>
+  <g font-family="monospace" font-size="14" letter-spacing="3" fill="#46E3DC" opacity=".7">
+    <text x="164" y="278">f0</text>
+    <text x="334" y="238">2f0</text>
+  </g>
+
+  <g stroke="#F2F0ED" stroke-width="1" opacity=".12">
+    <line x1="80" y1="880" x2="1542" y2="880"/>
+    <line x1="80" y1="874" x2="80" y2="886"/>
+    <line x1="811" y1="874" x2="811" y2="886"/>
+    <line x1="1542" y1="874" x2="1542" y2="886"/>
+  </g>
+  <g font-family="monospace" font-size="14" letter-spacing="3" fill="#F2F0ED" opacity=".34">
+    <text x="68" y="916">0 Hz</text>
+    <text x="772" y="916">11 k</text>
+    <text x="1476" y="916">22 k</text>
+  </g>
+
+  <g stroke="#F2F0ED" stroke-width="1.2" opacity=".16" fill="none">
+    <path d="M40 74V40h34"/><path d="M1526 40h34v34"/>
+    <path d="M1560 926v34h-34"/><path d="M74 960H40v-34"/>
+  </g>
+  <g font-family="monospace" font-size="15" letter-spacing="4" fill="#F2F0ED" opacity=".32">
+    <text x="40" y="944">FIG. 005</text>
+    <text x="1382" y="76">FFT / 2048 pt</text>
+  </g>
+</svg>

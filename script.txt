@@ -1,0 +1,18 @@
+Role & Goal: Build a futuristic, highly interactive, and responsive 3D personal portfolio website for [Your Name], a [Your Profession, e.g., Creative Technologist / UI/UX Designer / Full-Stack Developer].
+Visual Aesthetic & Theme:
+• Foundation: Dark near-back background (#0A0A0A or #111111) with subtle film grain and a glowing purple/electric-blue ambient gradient.
+• Typography: Bold, clean sans-serif typography (e.g., Inter or Syne) with clip-path headline reveals and subtle cursor-following glow effects.
+• 3D & Motion Stack: Integrate Three.js / React Three Fiber or a Spline 3D scene in the hero section (e.g., an interactive floating abstract 3D object, particle galaxy, or rotating geometric sculpture that responds to mouse movement via OrbitControls). Use GSAP and Locomotive Scroll for smooth scroll-driven animations and parallax effects.
+Page Sections & Layout:
+1. Preloader: Full-screen animated preloader with a progress bar filling from 0% to 100%, displaying an animated logo and brand text before smoothly revealing the site.
+2. Hero Section: Split-screen or centered layout with a massive animated headline, short sub-headline, glowing "Hire Me" / "Explore Work" action buttons, and the interactive full-screen/side 3D model background.
+3. About Section: Profile image inside a glowing circular frame, a concise bio, and an interactive grid of tech stack / skill icons.
+4. Selected Works / Projects: 6 glassmorphic project cards with hover-tilt physics, preview images, tech tags, and direct links to live demos or case studies.
+5. Experience / Timeline: A clean scroll-triggered timeline showing past work history and achievements.
+6. Contact Section: Minimalist interactive contact form with copy-to-clipboard email and social links (GitHub, LinkedIn, X).
+7. Footer: Simple copyright, quick jump links, and back-to-top button.
+Technical & Performance Requirements:
+• Fully responsive across desktop, tablet, and mobile devices.
+• Performance guardrails enabled: limit heavy particle counts and ensure proper mobile touch/pointer events so 3D elements do not block scrolling.
+• Clean code structure, browser-native WebGL/Three.js support, and ready for export or one-click deployment.
+Use dummy data for now. 

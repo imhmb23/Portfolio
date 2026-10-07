@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Halcyon — orbital ring study">
+  <defs>
+    <radialGradient id="h-core" cx="50%" cy="50%" r="50%">
+      <stop offset="0"  stop-color="#B9AFFF" stop-opacity=".95"/>
+      <stop offset=".5" stop-color="#6D5BFF" stop-opacity=".35"/>
+      <stop offset="1"  stop-color="#6D5BFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="h-bg" cx="50%" cy="52%" r="62%">
+      <stop offset="0" stop-color="#15122E"/>
+      <stop offset="1" stop-color="#0A0A0C"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#0B0B0D"/>
+  <rect width="1600" height="1000" fill="url(#h-bg)"/>
+
+  <g fill="none" stroke="#8E82FF">
+    <circle cx="800" cy="520" r="86"  stroke-width="1"   opacity=".42"/>
+    <circle cx="800" cy="520" r="128" stroke-width="1"   opacity=".36"/>
+    <circle cx="800" cy="520" r="170" stroke-width="1"   opacity=".30"/>
+    <circle cx="800" cy="520" r="212" stroke-width="1"   opacity=".25"/>
+    <circle cx="800" cy="520" r="254" stroke-width="1"   opacity=".20"/>
+    <circle cx="800" cy="520" r="296" stroke-width="1"   opacity=".16"/>
+    <circle cx="800" cy="520" r="338" stroke-width="1"   opacity=".12"/>
+    <circle cx="800" cy="520" r="380" stroke-width="1"   opacity=".09"/>
+    <circle cx="800" cy="520" r="422" stroke-width="1"   opacity=".06"/>
+  </g>
+
+  <g fill="none" stroke="#46E3DC" opacity=".4">
+    <ellipse cx="800" cy="520" rx="470" ry="150" stroke-width="1"/>
+    <ellipse cx="800" cy="520" rx="470" ry="150" stroke-width="1" transform="rotate(60 800 520)"/>
+    <ellipse cx="800" cy="520" rx="470" ry="150" stroke-width="1" transform="rotate(120 800 520)"/>
+  </g>
+
+  <circle cx="800" cy="520" r="120" fill="url(#h-core)"/>
+
+  <g fill="#F2F0ED">
+    <circle cx="800" cy="520" r="4.5"/>
+    <circle cx="886" cy="520" r="3" opacity=".7"/>
+  </g>
+  <g fill="#46E3DC">
+    <circle cx="800" cy="308" r="3.5" opacity=".85"/>
+    <circle cx="1230" cy="670" r="3"   opacity=".6"/>
+    <circle cx="436" cy="336" r="2.5"  opacity=".5"/>
+  </g>
+
+  <g stroke="#F2F0ED" stroke-width="1.2" opacity=".16" fill="none">
+    <path d="M40 74V40h34"/><path d="M1526 40h34v34"/>
+    <path d="M1560 926v34h-34"/><path d="M74 960H40v-34"/>
+  </g>
+  <g font-family="monospace" font-size="15" letter-spacing="4" fill="#F2F0ED" opacity=".32">
+    <text x="40" y="944">FIG. 001</text>
+    <text x="1400" y="76">ORBITAL / 60HZ</text>
+  </g>
+</svg>

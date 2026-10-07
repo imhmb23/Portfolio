@@ -1,0 +1,103 @@
+/* ═══════════════════════════════════════════════════════════════════
+   TOKENS
+   Single source of truth. Every value in the stylesheet resolves back
+   to something here — no orphan hex codes buried in a section file.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Surface ──────────────────────────────────────────────────────
+     Near-black, but warm-neutral rather than pure #000. Pure black
+     crushes shadows and makes every border look like a hard edge. */
+  --bg:          #0A0A0A;
+  --bg-raise:    #101011;
+  --bg-sink:     #070708;
+  --surface:     rgba(242, 240, 237, 0.026);
+  --surface-hi:  rgba(242, 240, 237, 0.052);
+
+  /* ── Ink ──────────────────────────────────────────────────────────
+     Three steps only. A fourth always turns into mud. */
+  --ink:       #F2F0ED;
+  --ink-dim:   #A5A3A0;
+  --ink-mute:  #6B6A70;
+  --ink-faint: #45444A;
+
+  /* ── Accent ───────────────────────────────────────────────────────
+     One accent, used at low chroma for ambient light and full chroma
+     only for genuinely interactive states. The blue is a supporting
+     tone inside the 3D scene, not a second UI colour. */
+  --acc:       #6D5BFF;
+  --acc-soft:  rgba(109, 91, 255, 0.14);
+  --acc-line:  rgba(109, 91, 255, 0.34);
+  --acc-blue:  #2F6BFF;
+  --acc-cyan:  #46E3DC;
+
+  /* ── Lines ────────────────────────────────────────────────────────
+     Hairlines carry the whole layout. Kept below the threshold where
+     they read as "a border" and above the threshold where they vanish. */
+  --line:        rgba(242, 240, 237, 0.085);
+  --line-mid:    rgba(242, 240, 237, 0.14);
+  --line-strong: rgba(242, 240, 237, 0.26);
+
+  /* ── Type ─────────────────────────────────────────────────────────
+     Syne for display (wide, geometric, unmistakably not Inter).
+     Inter for body (legibility at 15px).
+     JetBrains Mono for all metadata, indices and labels. */
+  --display: "Syne", "Inter", system-ui, sans-serif;
+  --body:    "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Fluid scale. Ratio tightens at the top so the display sizes don't
+     run off the viewport on ultrawide. */
+  --t-display: clamp(3.4rem, 12.5vw, 12rem);
+  --t-h1:      clamp(2.6rem, 7.4vw, 5.6rem);
+  --t-h2:      clamp(2rem, 4.6vw, 3.4rem);
+  --t-h3:      clamp(1.35rem, 2.2vw, 1.85rem);
+  --t-lede:    clamp(1.12rem, 1.75vw, 1.5rem);
+  --t-body:    clamp(0.94rem, 1.05vw, 1.02rem);
+  --t-mono:    0.7rem;
+  --t-mono-s:  0.625rem;
+
+  /* ── Space ────────────────────────────────────────────────────────
+     8px base. Section rhythm is deliberately uneven — equal padding
+     top and bottom on every section is the tell of a template. */
+  --s1: 0.5rem;   --s2: 1rem;    --s3: 1.5rem;  --s4: 2rem;
+  --s5: 3rem;     --s6: 4rem;    --s7: 6rem;    --s8: 8rem;
+  --section-y:  clamp(6rem, 13vh, 11rem);
+  --gutter:     clamp(1.25rem, 4.5vw, 4.5rem);
+  --wrap:       1440px;
+  --nav-h:      72px;
+
+  /* ── Radii ────────────────────────────────────────────────────────
+     Restrained on purpose. 24px on everything is a giveaway. */
+  --r-sm: 3px;
+  --r-md: 6px;
+  --r-lg: 10px;
+
+  /* ── Motion ───────────────────────────────────────────────────────
+     Custom curves with real character. `--ease-out` decelerates hard
+     at the end; `--ease-io` is a slight overshoot-free symmetric. */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io:   cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-swift: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 0.24s;
+  --dur:      0.5s;
+  --dur-slow: 0.9s;
+
+  --z-canvas: 0;
+  --z-content: 1;
+  --z-nav: 40;
+  --z-drawer: 45;
+  --z-cursor: 60;
+  --z-grain: 70;
+  --z-preloader: 90;
+}
+
+/* Accessibility: collapse every duration when the user asks for it.
+   0.001ms rather than 0 so transitionend listeners still fire. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0.001ms;
+    --dur: 0.001ms;
+    --dur-slow: 0.001ms;
+  }
+}

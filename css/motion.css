@@ -1,0 +1,119 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MOTION — reveal states + reduced-motion overrides
+
+   Every initial "hidden" state is gated behind `html.js`, so a browser
+   with JavaScript disabled renders the full page immediately. main.js
+   additionally force-reveals everything on a timer, so a failed CDN
+   can never leave the page blank.
+
+   NOTE ON `translate` vs `transform`
+   Reveals animate the standalone `translate` property, not `transform`.
+   The two compose (the spec applies translate → rotate → scale →
+   transform), so a project card can carry its hover tilt in `transform`
+   while revealing via `translate`. Using `transform` here would
+   overwrite the tilt outright, since a reveal selector with equal
+   specificity and later source order would win.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Scroll reveals ───────────────────────────────────────────────
+   Opacity plus a short rise. Deliberately restrained: a large travel
+   distance reads as "animation added for its own sake". */
+.js [data-reveal] {
+  opacity: 0;
+  translate: 0 20px;
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity   var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms),
+    translate var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+/* ── Clip-path headline reveal ────────────────────────────────────
+   Section titles wipe open from the top edge rather than fading, which
+   keeps the type feeling like a solid object being uncovered. */
+.js .shead__title {
+  clip-path: inset(0 0 100% 0);
+}
+.js .shead__title.is-in {
+  clip-path: inset(0 0 -12% 0);
+  transition: clip-path 1.05s var(--ease-io);
+}
+
+/* ── Hero headline lines ──────────────────────────────────────────
+   Each line sits in an overflow-hidden mask and slides up into place.
+   GSAP drives these to `yPercent: 0`; see js/scroll.js. Nothing else
+   writes transform on these elements, so transform is safe here. */
+.js .hero__title .line__in {
+  transform: translateY(105%);
+}
+
+/* ── Non-JS / failed-JS safety net ────────────────────────────────
+   Applied by the failsafe timer in main.js. Clears the reveal state
+   only — it deliberately does not touch `transform`, so card tilt and
+   every other transform-driven effect keeps working. */
+html.force-reveal [data-reveal] {
+  opacity: 1 !important;
+  translate: none !important;
+  transition: none !important;
+}
+html.force-reveal .shead__title {
+  clip-path: none !important;
+  transition: none !important;
+}
+html.force-reveal .hero__title .line__in {
+  transform: none !important;
+  transition: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   REDUCED MOTION
+   Honour the OS setting properly: no reveals, no parallax, no tilt,
+   no looping decoration — but keep the page fully legible.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+  .js .shead__title { clip-path: none !important; }
+  .js .hero__title .line__in { transform: none !important; }
+
+  /* Transform is only killed here, where disabling the tilt is the
+     point. */
+  .card { transform: none !important; }
+  .card:hover .card__media img { transform: none; }
+  .hero__cursor { animation: none; opacity: 1; }
+  .hero__rail-line::after { display: none; }
+  .portrait__ring { animation: none; }
+  .nav__cta-dot, .pulse { animation: none; }
+  .grain { animation: none; }
+}
+
+/* Coarse pointers get no hover physics at all — tilt is a lie on
+   touch, and the transform cost is real. */
+@media (pointer: coarse) {
+  .card { transform: none !important; }
+}
+
+/* ── Print ────────────────────────────────────────────────────────
+   A portfolio gets printed. Make it not look broken. */
+@media print {
+  .preloader, .nav, .drawer, .grain, .cursor, .progress,
+  .hero__stage, .hero__rail, .totop { display: none !important; }
+  body { background: #fff; color: #000; }
+  body::before { display: none; }
+  .js [data-reveal] { opacity: 1 !important; translate: none !important; }
+  .section { padding-block: 2rem; break-inside: avoid; }
+  .card { break-inside: avoid; border-color: #ccc; transform: none !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.7em; }
+}

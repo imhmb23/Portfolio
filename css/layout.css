@@ -1,0 +1,453 @@
+/* ═══════════════════════════════════════════════════════════════════
+   LAYOUT — wrap, preloader, nav, drawer, section heads, footer
+   ═══════════════════════════════════════════════════════════════════ */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+/* Hairline rule marking each section boundary, inset to the gutter. */
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--gutter);
+  right: var(--gutter);
+  height: 1px;
+  background: var(--line);
+}
+
+/* ── Section header ───────────────────────────────────────────────
+   Numbered mono index, display title, right-aligned meta. The three
+   columns are deliberately unequal — 1fr / auto is what makes it read
+   as an editorial masthead rather than a centred heading. */
+.shead {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: var(--s3) var(--s4);
+  padding-bottom: var(--s5);
+}
+.shead__idx {
+  color: var(--acc);
+  font-size: var(--t-mono);
+  padding-top: 0.4em;
+}
+.shead__title {
+  font-size: var(--t-h2);
+  font-weight: 700;
+}
+.shead__meta {
+  text-align: right;
+  color: var(--ink-faint);
+  padding-bottom: 0.5em;
+}
+
+@media (max-width: 760px) {
+  .shead {
+    grid-template-columns: auto 1fr;
+    row-gap: var(--s2);
+  }
+  .shead__meta {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   PRELOADER
+   ═══════════════════════════════════════════════════════════════════ */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  background: var(--bg-sink);
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  align-items: center;
+  justify-items: center;
+  padding: var(--gutter);
+  clip-path: inset(0 0 0 0);
+}
+/* Without JS the preloader would never be dismissed, so hide it
+   outright and let the page render normally. */
+html.no-js .preloader { display: none; }
+/* Faint technical grid — reads as a drafting surface, not a splash. */
+.preloader__grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(to right,  var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 88px 88px;
+  mask-image: radial-gradient(70% 70% at 50% 50%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 20%, transparent 78%);
+}
+
+.preloader__mark {
+  grid-row: 2;
+  align-self: end;
+  width: 88px;
+  margin-bottom: var(--s4);
+  color: var(--ink);
+}
+.preloader__mark svg { width: 100%; height: auto; overflow: visible; }
+
+.pl-ring {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+.pl-glyph {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.4;
+  stroke-linecap: square;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.preloader__body {
+  grid-row: 2;
+  align-self: center;
+  width: min(340px, 74vw);
+  text-align: center;
+  margin-top: var(--s5);
+}
+.preloader__brand {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.62rem;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--s3);
+}
+.preloader__rule {
+  position: relative;
+  height: 1px;
+  background: var(--line);
+  overflow: hidden;
+}
+.preloader__rule span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--ink);
+  transition: width 0.3s var(--ease-swift);
+}
+
+.preloader__foot {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: var(--t-mono-s);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.preloader__count { color: var(--ink-dim); }
+.preloader__count b { font-weight: 500; color: var(--ink); }
+.preloader__count i { font-style: normal; margin-left: 1px; }
+
+/* Exit: the whole panel is clipped away upward from the bottom edge.
+   pointer-events:none is load-bearing — the overlay sits in the DOM for
+   another ~1.5s while it fades, and without this it would swallow every
+   click on the freshly revealed page. */
+.preloader.is-done {
+  clip-path: inset(0 0 100% 0);
+  opacity: 0;
+  pointer-events: none;
+  transition: clip-path 1s var(--ease-io), opacity 0.4s linear 0.6s;
+}
+.preloader.is-gone { display: none; }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   PROGRESS BAR + NAV
+   ═══════════════════════════════════════════════════════════════════ */
+
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  z-index: calc(var(--z-nav) + 1);
+  background: transparent;
+}
+.progress span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--acc-blue), var(--acc));
+  transform-origin: left;
+}
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: var(--z-nav);
+  height: var(--nav-h);
+  transition: transform var(--dur) var(--ease-out),
+              background var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+/* Solidifies only once the hero is behind us. */
+.nav.is-stuck {
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border-bottom-color: var(--line);
+}
+.nav.is-hidden { transform: translateY(-100%); }
+
+.nav__inner {
+  height: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+}
+
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  margin-right: auto;
+}
+.nav__mark { width: 17px; height: 17px; color: var(--acc); flex: none; }
+.nav__brand:hover .nav__mark { color: var(--ink); }
+.nav__mark { transition: color var(--dur-fast) var(--ease-out); }
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+}
+.nav__links a {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.nav__links a em {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -0.42rem;
+  width: 100%; height: 1px;
+  background: var(--acc);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease-out);
+}
+.nav__links a:hover { color: var(--ink); }
+.nav__links a:hover em { color: var(--acc); }
+.nav__links a:hover::after,
+.nav__links a.is-current::after { transform: scaleX(1); }
+.nav__links a.is-current { color: var(--ink); }
+
+.nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--line-mid);
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: var(--t-mono-s);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  transition: border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.nav__cta:hover { border-color: var(--acc-line); color: var(--ink); }
+.nav__cta-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--acc-cyan);
+  box-shadow: 0 0 0 0 rgba(70, 227, 220, 0.55);
+  animation: livePulse 2.6s var(--ease-io) infinite;
+}
+@keyframes livePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(70, 227, 220, 0.5); }
+  70%  { box-shadow: 0 0 0 7px rgba(70, 227, 220, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(70, 227, 220, 0); }
+}
+
+.nav__toggle {
+  display: none;
+  width: 40px; height: 40px;
+  position: relative;
+  margin-right: -8px;
+}
+.nav__toggle span:not(.sr-only) {
+  position: absolute;
+  left: 9px;
+  width: 22px; height: 1.5px;
+  background: var(--ink);
+  transition: transform var(--dur) var(--ease-out),
+              opacity var(--dur-fast) var(--ease-out);
+}
+.nav__toggle span:nth-child(1) { top: 16px; }
+.nav__toggle span:nth-child(2) { top: 23px; }
+.nav__toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
+.nav__toggle[aria-expanded="true"] span:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
+
+@media (max-width: 940px) {
+  .nav__links, .nav__cta { display: none; }
+  .nav__toggle { display: block; }
+}
+
+/* ── Mobile drawer ──────────────────────────────────────────────── */
+.drawer {
+  position: fixed;
+  inset: var(--nav-h) 0 0 0;
+  z-index: var(--z-drawer);
+  background: var(--bg);
+  padding: var(--s6) var(--gutter) var(--s5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity var(--dur) var(--ease-out),
+              transform var(--dur) var(--ease-out);
+}
+.drawer[hidden] { display: none; }
+.drawer.is-open { opacity: 1; transform: translateY(0); }
+
+.drawer__links { display: flex; flex-direction: column; gap: 0.2rem; }
+.drawer__links a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.03em;
+}
+.drawer__links a em {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--acc);
+}
+.drawer__foot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════════ */
+
+.footer {
+  position: relative;
+  z-index: var(--z-content);
+  border-top: 1px solid var(--line);
+  padding-block: var(--s6) var(--s4);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4));
+}
+.footer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  flex-wrap: wrap;
+  padding-bottom: var(--s5);
+  border-bottom: 1px solid var(--line);
+}
+.footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.06rem;
+  letter-spacing: -0.02em;
+}
+.footer__brand svg { width: 17px; height: 17px; color: var(--acc); }
+
+.footer__jump { display: flex; gap: var(--s4); flex-wrap: wrap; }
+.footer__jump a {
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.footer__jump a:hover { color: var(--ink); }
+
+.totop {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 0.95rem;
+  border: 1px solid var(--line-mid);
+  border-radius: var(--r-sm);
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+.totop:hover { border-color: var(--acc-line); background: var(--acc-soft); }
+.totop svg { width: 13px; height: 13px; transition: transform var(--dur) var(--ease-out); }
+.totop:hover svg { transform: translateY(-3px); }
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s3);
+  flex-wrap: wrap;
+  padding-top: var(--s4);
+  color: var(--ink-faint);
+}
+.footer__bottom .mono { font-size: var(--t-mono-s); color: var(--ink-faint); }
+
+@media (max-width: 720px) {
+  .footer__top { flex-direction: column; align-items: flex-start; }
+  .footer__bottom { flex-direction: column; gap: 0.5rem; }
+}

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Tidal — layered waveform study">
+  <defs>
+    <linearGradient id="t-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0A0A14"/>
+      <stop offset="1" stop-color="#0B0B0D"/>
+    </linearGradient>
+    <linearGradient id="t-a" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#6D5BFF" stop-opacity=".25"/>
+      <stop offset=".45" stop-color="#8E82FF" stop-opacity="1"/>
+      <stop offset="1"   stop-color="#2F6BFF" stop-opacity=".3"/>
+    </linearGradient>
+    <linearGradient id="t-b" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#2F6BFF" stop-opacity=".2"/>
+      <stop offset=".55" stop-color="#46E3DC" stop-opacity=".95"/>
+      <stop offset="1"   stop-color="#46E3DC" stop-opacity=".25"/>
+    </linearGradient>
+
+    <!-- four amplitudes of the same period, reused across the stack -->
+    <path id="t-w1" d="M-100 0Q50-70 200 0T500 0T800 0T1100 0T1400 0T1700 0"/>
+    <path id="t-w2" d="M-100 0Q50-52 200 0T500 0T800 0T1100 0T1400 0T1700 0"/>
+    <path id="t-w3" d="M-100 0Q50-34 200 0T500 0T800 0T1100 0T1400 0T1700 0"/>
+    <path id="t-w4" d="M-100 0Q50-18 200 0T500 0T800 0T1100 0T1400 0T1700 0"/>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#t-bg)"/>
+  <rect x="0" y="0" width="1600" height="1000" fill="#6D5BFF" opacity=".05"/>
+
+  <!-- datum lines -->
+  <g stroke="#F2F0ED" stroke-width="1" opacity=".1">
+    <line x1="0" y1="200" x2="1600" y2="200"/>
+    <line x1="0" y1="880" x2="1600" y2="880"/>
+  </g>
+
+  <g fill="none" stroke="url(#t-a)" stroke-width="1.25">
+    <use href="#t-w1" y="200" opacity=".20"/>
+    <use href="#t-w3" y="252" opacity=".26"/>
+    <use href="#t-w2" y="304" opacity=".32"/>
+    <use href="#t-w4" y="356" opacity=".37"/>
+    <use href="#t-w1" y="408" opacity=".43"/>
+    <use href="#t-w3" y="460" opacity=".49"/>
+    <use href="#t-w2" y="512" opacity=".55"/>
+    <use href="#t-w4" y="564" opacity=".61"/>
+    <use href="#t-w1" y="616" opacity=".67"/>
+    <use href="#t-w3" y="668" opacity=".72"/>
+    <use href="#t-w2" y="720" opacity=".78"/>
+    <use href="#t-w4" y="772" opacity=".83"/>
+    <use href="#t-w1" y="824" opacity=".88"/>
+    <use href="#t-w2" y="876" opacity=".92"/>
+  </g>
+
+  <!-- the anomaly: one crest out of phase -->
+  <use href="#t-w1" y="512" fill="none" stroke="url(#t-b)" stroke-width="2" opacity=".95"/>
+
+  <!-- crest markers -->
+  <g fill="#46E3DC">
+    <circle cx="200" cy="512"  r="4"/>
+    <circle cx="1100" cy="512" r="4"/>
+  </g>
+  <g stroke="#F2F0ED" stroke-width="1" opacity=".3">
+    <line x1="200" y1="512" x2="200" y2="944"/>
+    <line x1="1100" y1="512" x2="1100" y2="944"/>
+    <line x1="200" y1="936" x2="1100" y2="936"/>
+  </g>
+  <text x="596" y="922" font-family="monospace" font-size="14" letter-spacing="3" fill="#F2F0ED" opacity=".38">Δt 40 h</text>
+
+  <g stroke="#F2F0ED" stroke-width="1.2" opacity=".16" fill="none">
+    <path d="M40 74V40h34"/><path d="M1526 40h34v34"/>
+    <path d="M1560 926v34h-34"/><path d="M74 960H40v-34"/>
+  </g>
+  <g font-family="monospace" font-size="15" letter-spacing="4" fill="#F2F0ED" opacity=".32">
+    <text x="40" y="944">FIG. 004</text>
+    <text x="1372" y="76">TIDE / 1979—2019</text>
+  </g>
+</svg>

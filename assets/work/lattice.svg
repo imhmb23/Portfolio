@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Lattice — isometric network study">
+  <defs>
+    <radialGradient id="l-bg" cx="50%" cy="46%" r="66%">
+      <stop offset="0" stop-color="#121029"/>
+      <stop offset="1" stop-color="#0A0A0C"/>
+    </radialGradient>
+    <linearGradient id="l-edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"   stop-color="#6D5BFF" stop-opacity=".85"/>
+      <stop offset="1"   stop-color="#46E3DC" stop-opacity=".7"/>
+    </linearGradient>
+    <mask id="l-fade">
+      <radialGradient id="l-mg" cx="50%" cy="48%" r="58%">
+        <stop offset="0"   stop-color="#fff"/>
+        <stop offset=".7"  stop-color="#fff" stop-opacity=".6"/>
+        <stop offset="1"   stop-color="#000"/>
+      </radialGradient>
+      <rect width="1600" height="1000" fill="url(#l-mg)"/>
+    </mask>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#0B0B0D"/>
+  <rect width="1600" height="1000" fill="url(#l-bg)"/>
+
+  <g mask="url(#l-fade)">
+    <!-- isometric plane: an orthogonal grid rotated into axonometric -->
+    <g transform="rotate(-30 800 500)" fill="none">
+      <g stroke="#8E82FF" stroke-width="1" opacity=".2">
+        <line x1="-200" y1="-200" x2="-200" y2="1200"/>
+        <line x1="-60"  y1="-200" x2="-60"  y2="1200"/>
+        <line x1="80"   y1="-200" x2="80"   y2="1200"/>
+        <line x1="220"  y1="-200" x2="220"  y2="1200"/>
+        <line x1="360"  y1="-200" x2="360"  y2="1200"/>
+        <line x1="500"  y1="-200" x2="500"  y2="1200"/>
+        <line x1="640"  y1="-200" x2="640"  y2="1200"/>
+        <line x1="780"  y1="-200" x2="780"  y2="1200"/>
+        <line x1="920"  y1="-200" x2="920"  y2="1200"/>
+        <line x1="1060" y1="-200" x2="1060" y2="1200"/>
+        <line x1="1200" y1="-200" x2="1200" y2="1200"/>
+        <line x1="1340" y1="-200" x2="1340" y2="1200"/>
+        <line x1="1480" y1="-200" x2="1480" y2="1200"/>
+        <line x1="1620" y1="-200" x2="1620" y2="1200"/>
+        <line x1="1760" y1="-200" x2="1760" y2="1200"/>
+      </g>
+      <g stroke="#8E82FF" stroke-width="1" opacity=".14">
+        <line x1="-300" y1="0" x2="1900" y2="0"/>
+        <line x1="-300" y1="140" x2="1900" y2="140"/>
+        <line x1="-300" y1="280" x2="1900" y2="280"/>
+        <line x1="-300" y1="420" x2="1900" y2="420"/>
+        <line x1="-300" y1="560" x2="1900" y2="560"/>
+        <line x1="-300" y1="700" x2="1900" y2="700"/>
+        <line x1="-300" y1="840" x2="1900" y2="840"/>
+        <line x1="-300" y1="980" x2="1900" y2="980"/>
+        <line x1="-300" y1="1120" x2="1900" y2="1120"/>
+        <line x1="-300" y1="1260" x2="1900" y2="1260"/>
+      </g>
+
+      <!-- highlighted service path -->
+      <g stroke="url(#l-edge)" stroke-width="2.4" opacity=".9" fill="none">
+        <path d="M360 280 L500 420 L640 280 L780 420"/>
+      </g>
+      <g fill="#46E3DC">
+        <circle cx="360" cy="280" r="5"/>
+        <circle cx="500" cy="420" r="5"/>
+        <circle cx="640" cy="280" r="5"/>
+        <circle cx="780" cy="420" r="5"/>
+      </g>
+    </g>
+
+    <!-- entry and exit nodes, drawn upright so they read as terminals -->
+    <g fill="#F2F0ED">
+      <circle cx="288" cy="860" r="6"/>
+      <circle cx="1314" cy="192" r="6"/>
+    </g>
+    <g stroke="#F2F0ED" stroke-width="1" opacity=".35" fill="none">
+      <circle cx="288" cy="860" r="18"/>
+      <circle cx="1314" cy="192" r="18"/>
+    </g>
+  </g>
+
+  <g font-family="monospace" font-size="14" letter-spacing="3" fill="#F2F0ED" opacity=".38">
+    <text x="250" y="912">ingress</text>
+    <text x="1276" y="244">egress</text>
+  </g>
+
+  <g stroke="#F2F0ED" stroke-width="1.2" opacity=".16" fill="none">
+    <path d="M40 74V40h34"/><path d="M1526 40h34v34"/>
+    <path d="M1560 926v34h-34"/><path d="M74 960H40v-34"/>
+  </g>
+  <g font-family="monospace" font-size="15" letter-spacing="4" fill="#F2F0ED" opacity=".32">
+    <text x="40" y="944">FIG. 006</text>
+    <text x="1378" y="76">TOPOLOGY / 4N</text>
+  </g>
+</svg>

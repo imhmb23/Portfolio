@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kai Voss — Creative Technologist</title>
+<meta name="description" content="Kai Voss is a creative technologist building interfaces, 3D experiences and the systems underneath them. Selected work, experience and contact.">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="color-scheme" content="dark">
+
+<!-- Social card. Most platforms will not render SVG — export
+     assets/og.svg to PNG at 1200×630 and swap the two paths below
+     before launch. See README. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kai Voss — Creative Technologist">
+<meta property="og:description" content="Interfaces, 3D experiences and the systems underneath them.">
+<meta property="og:image" content="assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="assets/og.png">
+
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/mark.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/motion.css">
+
+<script>
+  /* Set before first paint: `js` unlocks the animated initial states,
+     `is-loading` locks scrolling while the preloader is up. Both are
+     removed by main.js, and neither is set at all without JS. */
+  var d = document.documentElement;
+  d.classList.replace('no-js', 'js');
+  d.classList.add('is-loading');
+</script>
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     00 — PRELOADER
+     Counter runs on a timer and always completes, so a slow or blocked
+     CDN can never trap the visitor behind this overlay.
+     ══════════════════════════════════════════════════════════════ -->
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading">
+  <div class="preloader__grid" aria-hidden="true"></div>
+
+  <div class="preloader__mark">
+    <svg viewBox="0 0 120 120" fill="none" aria-hidden="true">
+      <circle class="pl-ring" cx="60" cy="60" r="46" pathLength="1"/>
+      <path class="pl-glyph" d="M38 84V36M38 60l26-24M38 62l30 22" pathLength="1"/>
+    </svg>
+  </div>
+
+  <div class="preloader__body">
+    <p class="preloader__brand">Kai&nbsp;Voss</p>
+    <div class="preloader__rule"><span id="preloadBar"></span></div>
+  </div>
+
+  <div class="preloader__foot">
+    <span>Creative Technologist</span>
+    <span class="preloader__count"><b id="preloadCount">00</b><i>%</i></span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     NAVIGATION
+     ══════════════════════════════════════════════════════════════ -->
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#top" aria-label="Kai Voss — home">
+      <svg class="nav__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 19V5M6 12l7-7M6 12.4l8 6.6" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+      <span>Kai Voss</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#work"><em>01</em>Work</a>
+      <a href="#about"><em>02</em>Profile</a>
+      <a href="#experience"><em>03</em>Trajectory</a>
+      <a href="#contact"><em>04</em>Contact</a>
+    </nav>
+
+    <a class="nav__cta" href="#contact">
+      <span class="nav__cta-dot" aria-hidden="true"></span>
+      Available — Q1
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer">
+      <span></span><span></span>
+      <span class="sr-only">Menu</span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="navDrawer" hidden>
+  <nav class="drawer__links" aria-label="Mobile">
+    <a href="#work"><em>01</em>Work</a>
+    <a href="#about"><em>02</em>Profile</a>
+    <a href="#experience"><em>03</em>Trajectory</a>
+    <a href="#contact"><em>04</em>Contact</a>
+  </nav>
+  <div class="drawer__foot">
+    <a href="mailto:hello@kaivoss.dev">hello@kaivoss.dev</a>
+    <span>Berlin — 52.52°N</span>
+  </div>
+</div>
+
+
+<main id="main">
+
+<!-- ══════════════════════════════════════════════════════════════════
+     HERO
+     Canvas is pointer-events:none by design — parallax listens on
+     window, so the 3D layer can never swallow a scroll or a tap.
+     ══════════════════════════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero__stage">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <canvas class="hero__canvas" id="gl" aria-hidden="true"></canvas>
+    <div class="hero__fallback" aria-hidden="true"></div>
+  </div>
+
+  <div class="hero__inner">
+    <p class="hero__eyebrow" data-reveal>
+      <span class="mono">Berlin</span>
+      <span class="dot" aria-hidden="true"></span>
+      <span class="mono">Creative Technologist</span>
+    </p>
+
+    <h1 class="hero__title">
+      <span class="line"><span class="line__in">Systems</span></span>
+      <span class="line"><span class="line__in">that feel</span></span>
+      <span class="line"><span class="line__in accent">alive<span class="hero__cursor" aria-hidden="true"></span></span></span>
+    </h1>
+
+    <div class="hero__row">
+      <p class="hero__sub" data-reveal>
+        I design and build interfaces, real-time 3D, and the systems
+        underneath them — for studios, product teams and anyone with
+        an unreasonable idea.
+      </p>
+
+      <div class="hero__actions" data-reveal>
+        <a class="btn btn--primary" href="#contact">
+          <span>Hire me</span>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#work">
+          <span>Explore work</span>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__rail" aria-hidden="true">
+    <span class="mono">52.52°N</span>
+    <span class="hero__rail-line"></span>
+    <span class="mono">Scroll</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     01 — SELECTED WORK
+     Asymmetric spans break the uniform card grid that reads as template.
+     ══════════════════════════════════════════════════════════════ -->
+<section class="section work" id="work">
+  <div class="wrap">
+
+    <header class="shead">
+      <span class="shead__idx mono" data-reveal>01</span>
+      <h2 class="shead__title" data-reveal>Selected work</h2>
+      <p class="shead__meta mono" data-reveal>2022 — 2026 · Six of twelve</p>
+    </header>
+
+    <div class="work__grid">
+
+      <article class="card card--wide" data-tilt data-reveal>
+        <a class="card__link" href="#" aria-label="Halcyon — spatial commerce platform">
+          <div class="card__media">
+            <img src="assets/work/halcyon.svg" alt="" loading="lazy" decoding="async" width="1600" height="1000">
+            <span class="card__glow" aria-hidden="true"></span>
+          </div>
+          <div class="card__body">
+            <div class="card__head">
+              <h3 class="card__title">Halcyon</h3>
+              <span class="card__idx mono">001</span>
+            </div>
+            <p class="card__desc">
+              A spatial commerce platform where every product is a real-time
+              3D object. Cut load time 68% and lifted conversion 2.4×.
+            </p>
+            <ul class="tags">
+              <li>WebGL</li><li>Three.js</li><li>React</li><li>Rust</li>
+            </ul>
+            <div class="card__foot">
+              <span class="card__role mono">Lead engineer · 2025</span>
+              <span class="card__go" aria-hidden="true">
+                View case
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="card" data-tilt data-reveal>
+        <a class="card__link" href="#" aria-label="Fieldnote — research tooling">
+          <div class="card__media">
+            <img src="assets/work/fieldnote.svg" alt="" loading="lazy" decoding="async" width="1600" height="1000">
+            <span class="card__glow" aria-hidden="true"></span>
+          </div>
+          <div class="card__body">
+            <div class="card__head">
+              <h3 class="card__title">Fieldnote</h3>
+              <span class="card__idx mono">002</span>
+            </div>
+            <p class="card__desc">
+              Offline-first research capture for ethnographers. CRDT sync,
+              conflict-free by construction.
+            </p>
+            <ul class="tags"><li>TypeScript</li><li>CRDT</li><li>PWA</li></ul>
+            <div class="card__foot">
+              <span class="card__role mono">Design + build · 2025</span>
+              <span class="card__go" aria-hidden="true">
+                View case
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="card" data-tilt data-reveal>
+        <a class="card__link" href="#" aria-label="Meridian — design system">
+          <div class="card__media">
+            <img src="assets/work/meridian.svg" alt="" loading="lazy" decoding="async" width="1600" height="1000">
+            <span class="card__glow" aria-hidden="true"></span>
+          </div>
+          <div class="card__body">
+            <div class="card__head">
+              <h3 class="card__title">Meridian</h3>
+              <span class="card__idx mono">003</span>
+            </div>
+            <p class="card__desc">
+              A design system spanning 9 products and 40 engineers.
+              Tokens in code, not in a Figma file that rots.
+            </p>
+            <ul class="tags"><li>Design systems</li><li>Tokens</li><li>a11y</li></ul>
+            <div class="card__foot">
+              <span class="card__role mono">Systems lead · 2024</span>
+              <span class="card__go" aria-hidden="true">
+                View case
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="card card--wide" data-tilt data-reveal>
+        <a class="card__link" href="#" aria-label="Tidal — climate data installation">
+          <div class="card__media">
+            <img src="assets/work/tidal.svg" alt="" loading="lazy" decoding="async" width="1600" height="1000">
+            <span class="card__glow" aria-hidden="true"></span>
+          </div>
+          <div class="card__body">
+            <div class="card__head">
+              <h3 class="card__title">Tidal</h3>
+              <span class="card__idx mono">004</span>
+            </div>
+            <p class="card__desc">
+              A gallery installation turning 40 years of North Sea
+              measurements into a slow, audible tide. 61k visitors.
+            </p>
+            <ul class="tags">
+              <li>TouchDesigner</li><li>GLSL</li><li>Generative audio</li><li>Hardware</li>
+            </ul>
+            <div class="card__foot">
+              <span class="card__role mono">Artist-engineer · 2024</span>
+              <span class="card__go" aria-hidden="true">
+                View case
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="card card--half" data-tilt data-reveal>
+        <a class="card__link" href="#" aria-label="Overtone — audio engine">
+          <div class="card__media">
+            <img src="assets/work/overtone.svg" alt="" loading="lazy" decoding="async" width="1600" height="1000">
+            <span class="card__glow" aria-hidden="true"></span>
+          </div>
+          <div class="card__body">
+            <div class="card__head">
+              <h3 class="card__title">Overtone</h3>
+              <span class="card__idx mono">005</span>
+            </div>
+            <p class="card__desc">
+              A browser audio engine doing granular synthesis on the
+              main thread budget of a 2015 laptop.
+            </p>
+            <ul class="tags"><li>WebAudio</li><li>WASM</li><li>DSP</li></ul>
+            <div class="card__foot">
+              <span class="card__role mono">Solo build · 2023</span>
+              <span class="card__go" aria-hidden="true">
+                View case
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="card card--half" data-tilt data-reveal>
+        <a class="card__link" href="#" aria-label="Lattice — developer platform">
+          <div class="card__media">
+            <img src="assets/work/lattice.svg" alt="" loading="lazy" decoding="async" width="1600" height="1000">
+            <span class="card__glow" aria-hidden="true"></span>
+          </div>
+          <div class="card__body">
+            <div class="card__head">
+              <h3 class="card__title">Lattice</h3>
+              <span class="card__idx mono">006</span>
+            </div>
+            <p class="card__desc">
+              Developer platform and CLI. One command from clone to
+              production for a 200-person org.
+            </p>
+            <ul class="tags"><li>Go</li><li>Kubernetes</li><li>DX</li></ul>
+            <div class="card__foot">
+              <span class="card__role mono">Platform · 2022</span>
+              <span class="card__go" aria-hidden="true">
+                View case
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+    </div>
+
+    <p class="work__more" data-reveal>
+      <span class="mono">Archive</span>
+      <a class="link-underline" href="#">Six more projects, 2019 — 2022</a>
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     02 — PROFILE
+     ══════════════════════════════════════════════════════════════ -->
+<section class="section about" id="about">
+  <div class="wrap">
+
+    <header class="shead">
+      <span class="shead__idx mono" data-reveal>02</span>
+      <h2 class="shead__title" data-reveal>Profile</h2>
+      <p class="shead__meta mono" data-reveal>Berlin · Working worldwide</p>
+    </header>
+
+    <div class="about__grid">
+
+      <div class="about__portrait" data-reveal>
+        <div class="portrait">
+          <span class="portrait__ring" aria-hidden="true"></span>
+          <span class="portrait__ring portrait__ring--2" aria-hidden="true"></span>
+          <div class="portrait__frame">
+            <img src="assets/portrait.svg" alt="Portrait of Kai Voss" width="640" height="640" loading="lazy" decoding="async">
+          </div>
+          <span class="portrait__badge mono">KV</span>
+        </div>
+        <dl class="portrait__facts">
+          <div><dt class="mono">Based</dt><dd>Berlin, DE</dd></div>
+          <div><dt class="mono">Since</dt><dd>2014</dd></div>
+          <div><dt class="mono">Focus</dt><dd>Interface · 3D · Systems</dd></div>
+        </dl>
+      </div>
+
+      <div class="about__copy">
+        <p class="lede" data-reveal>
+          I'm a creative technologist — which is a slightly evasive way of
+          saying I sit between design and engineering, and refuse to pick.
+        </p>
+        <p data-reveal>
+          For the last eleven years I've built things that are hard to
+          categorise: real-time visualisations, platforms that hold up under
+          real load, and interfaces that try to feel like objects rather than
+          forms. I've worked inside product teams, alongside studios, and
+          alone in a room with a compiler.
+        </p>
+        <p data-reveal>
+          I care about craft at the level of the millisecond and the pixel —
+          and about shipping, which is the part that separates a portfolio
+          from a person you'd actually hire.
+        </p>
+
+        <div class="about__cta" data-reveal>
+          <a class="btn btn--ghost" href="#contact">
+            <span>Start a project</span>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+          <a class="link-underline" href="#" download>Download CV</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="stack">
+      <div class="stack__head">
+        <span class="mono" data-reveal>Toolkit</span>
+        <span class="mono stack__count" data-reveal>14 disciplines</span>
+      </div>
+
+      <ul class="stack__grid" data-reveal>
+        <li class="skill"><span class="skill__i mono">01</span><span class="skill__n">Three.js</span><span class="skill__c mono">3D / WebGL</span></li>
+        <li class="skill"><span class="skill__i mono">02</span><span class="skill__n">GLSL</span><span class="skill__c mono">Shaders</span></li>
+        <li class="skill"><span class="skill__i mono">03</span><span class="skill__n">TypeScript</span><span class="skill__c mono">Language</span></li>
+        <li class="skill"><span class="skill__i mono">04</span><span class="skill__n">React</span><span class="skill__c mono">Interface</span></li>
+        <li class="skill"><span class="skill__i mono">05</span><span class="skill__n">GSAP</span><span class="skill__c mono">Motion</span></li>
+        <li class="skill"><span class="skill__i mono">06</span><span class="skill__n">Rust</span><span class="skill__c mono">Language</span></li>
+        <li class="skill"><span class="skill__i mono">07</span><span class="skill__n">Go</span><span class="skill__c mono">Language</span></li>
+        <li class="skill"><span class="skill__i mono">08</span><span class="skill__n">WebGPU</span><span class="skill__c mono">Compute</span></li>
+        <li class="skill"><span class="skill__i mono">09</span><span class="skill__n">Figma</span><span class="skill__c mono">Design</span></li>
+        <li class="skill"><span class="skill__i mono">10</span><span class="skill__n">Blender</span><span class="skill__c mono">3D</span></li>
+        <li class="skill"><span class="skill__i mono">11</span><span class="skill__n">Postgres</span><span class="skill__c mono">Data</span></li>
+        <li class="skill"><span class="skill__i mono">12</span><span class="skill__n">Kubernetes</span><span class="skill__c mono">Infra</span></li>
+        <li class="skill"><span class="skill__i mono">13</span><span class="skill__n">WebAudio</span><span class="skill__c mono">Sound</span></li>
+        <li class="skill"><span class="skill__i mono">14</span><span class="skill__n">TouchDesigner</span><span class="skill__c mono">Installation</span></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     03 — TRAJECTORY
+     ══════════════════════════════════════════════════════════════ -->
+<section class="section exp" id="experience">
+  <div class="wrap">
+
+    <header class="shead">
+      <span class="shead__idx mono" data-reveal>03</span>
+      <h2 class="shead__title" data-reveal>Trajectory</h2>
+      <p class="shead__meta mono" data-reveal>Eleven years, condensed</p>
+    </header>
+
+    <!-- The rail lives outside the <ol>; only <li> may be a direct
+         child of a list, so it cannot sit inside it. -->
+    <div class="timeline">
+      <span class="timeline__spine" aria-hidden="true"><i id="spineFill"></i></span>
+
+      <ol class="timeline__list">
+        <li class="tl" data-reveal>
+          <span class="tl__year mono">2023 — Now</span>
+          <div class="tl__body">
+            <h3 class="tl__role">Independent practice</h3>
+            <p class="tl__org">Self-directed · Berlin</p>
+            <p class="tl__desc">
+              Studio-of-one for spatial interfaces, installations and
+              product engineering. Clients include two automotive
+              groups, a national museum and four seed-stage teams.
+            </p>
+          </div>
+        </li>
+
+        <li class="tl" data-reveal>
+          <span class="tl__year mono">2020 — 2023</span>
+          <div class="tl__body">
+            <h3 class="tl__role">Principal Engineer, Experience</h3>
+            <p class="tl__org">Northbound · Amsterdam</p>
+            <p class="tl__desc">
+              Founded the real-time graphics group. Took the flagship
+              product from 4fps to a stable 60 on mid-tier devices, and
+              the team from two people to eleven.
+            </p>
+          </div>
+        </li>
+
+        <li class="tl" data-reveal>
+          <span class="tl__year mono">2017 — 2020</span>
+          <div class="tl__body">
+            <h3 class="tl__role">Senior Creative Developer</h3>
+            <p class="tl__org">Studio Meridiem · Copenhagen</p>
+            <p class="tl__desc">
+              Award-winning campaign work — two FWA Site of the Day, one
+              Awwwards SOTM. Learned that the interesting constraint is
+              never the budget, it's the deadline.
+            </p>
+          </div>
+        </li>
+
+        <li class="tl" data-reveal>
+          <span class="tl__year mono">2015 — 2017</span>
+          <div class="tl__body">
+            <h3 class="tl__role">Frontend Engineer</h3>
+            <p class="tl__org">Kestrel Labs · Remote</p>
+            <p class="tl__desc">
+              First job. Shipped a data platform still in production a
+              decade later, which I choose to read as a compliment to my
+              past self.
+            </p>
+          </div>
+        </li>
+
+        <li class="tl" data-reveal>
+          <span class="tl__year mono">2014</span>
+          <div class="tl__body">
+            <h3 class="tl__role">MA, Interaction Design</h3>
+            <p class="tl__org">Royal Academy · The Hague</p>
+            <p class="tl__desc">
+              Thesis on legibility in generative systems. Graduated with
+              more questions than I arrived with, which I'm told is the
+              point.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     04 — CONTACT
+     Form has no backend. It validates, then hands off to mailto: so the
+     page stays deployable as pure static files. See README to swap in
+     a form endpoint.
+     ══════════════════════════════════════════════════════════════ -->
+<section class="section contact" id="contact">
+  <div class="wrap">
+
+    <header class="shead">
+      <span class="shead__idx mono" data-reveal>04</span>
+      <h2 class="shead__title" data-reveal>Contact</h2>
+      <p class="shead__meta mono" data-reveal>Replies within two working days</p>
+    </header>
+
+    <div class="contact__grid">
+
+      <div class="contact__aside">
+        <p class="contact__lede" data-reveal>
+          Have something that doesn't fit an existing category?
+          That's usually the good stuff.
+        </p>
+
+        <div class="copy" data-reveal>
+          <span class="mono copy__label">Email</span>
+          <button class="copy__target" id="copyEmail" data-email="hello@kaivoss.dev" type="button">
+            <span class="copy__text">hello@kaivoss.dev</span>
+            <span class="copy__hint mono" id="copyHint">Copy</span>
+          </button>
+        </div>
+
+        <div class="contact__meta">
+          <div data-reveal>
+            <span class="mono">Elsewhere</span>
+            <ul class="socials">
+              <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg></a></li>
+              <li><a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg></a></li>
+              <li><a href="https://x.com/" target="_blank" rel="noopener noreferrer">X<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg></a></li>
+            </ul>
+          </div>
+          <div data-reveal>
+            <span class="mono">Status</span>
+            <p class="contact__status">
+              <span class="pulse" aria-hidden="true"></span>
+              Taking new work from March
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <form class="form" id="contactForm" novalidate data-reveal>
+        <div class="field">
+          <label for="f-name" class="mono">01 — Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Ada Lovelace" required>
+          <span class="field__err" data-err-for="f-name"></span>
+        </div>
+
+        <div class="field">
+          <label for="f-email" class="mono">02 — Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" placeholder="ada@company.com" required>
+          <span class="field__err" data-err-for="f-email"></span>
+        </div>
+
+        <div class="field">
+          <label for="f-budget" class="mono">03 — Budget</label>
+          <div class="select">
+            <select id="f-budget" name="budget" required>
+              <option value="">Select a range</option>
+              <option>Under €10k</option>
+              <option>€10k — €30k</option>
+              <option>€30k — €75k</option>
+              <option>€75k+</option>
+              <option>Not sure yet</option>
+            </select>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-msg" class="mono">04 — Brief</label>
+          <textarea id="f-msg" name="message" rows="4" placeholder="What are you building, and what's in the way?" required></textarea>
+          <span class="field__err" data-err-for="f-msg"></span>
+        </div>
+
+        <button class="btn btn--primary btn--block" type="submit" id="formSubmit">
+          <span>Send message</span>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
+
+        <p class="form__note mono" id="formNote" role="status">
+          Opens your mail client — no data leaves this page.
+        </p>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <a class="footer__brand" href="#top">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 19V5M6 12l7-7M6 12.4l8 6.6" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <span>Kai Voss</span>
+      </a>
+
+      <nav class="footer__jump" aria-label="Footer">
+        <a href="#work">Work</a>
+        <a href="#about">Profile</a>
+        <a href="#experience">Trajectory</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="totop" id="toTop" type="button">
+        <span class="mono">Back to top</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+    </div>
+
+    <div class="footer__bottom">
+      <span class="mono">© <span id="year">2026</span> Kai Voss — All rights reserved</span>
+      <span class="mono">Berlin · 52.52°N 13.40°E</span>
+      <span class="mono">Built with Three.js &amp; too much coffee</span>
+    </div>
+  </div>
+</footer>
+
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__dot"></span></div>
+<div class="grain" aria-hidden="true"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

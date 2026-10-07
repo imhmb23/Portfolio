@@ -1,0 +1,65 @@
+<!--
+  Social card source, 1200 × 630.
+
+  Most social platforms will NOT render an SVG og:image. Before launch,
+  export this to PNG at 1200×630 and point the og:image / twitter:image
+  tags in index.html at that file instead:
+
+    · macOS   : rsvg-convert -w 1200 -h 630 assets/og.svg -o assets/og.png
+    · Inkscape: inkscape assets/og.svg -w 1200 -h 630 -o assets/og.png
+    · Browser : open the SVG, screenshot at 1200×630, save as PNG
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Kai Voss — Creative Technologist">
+  <defs>
+    <radialGradient id="og-bg" cx="72%" cy="30%" r="76%">
+      <stop offset="0" stop-color="#1A1638"/>
+      <stop offset=".55" stop-color="#0D0C18"/>
+      <stop offset="1" stop-color="#0A0A0A"/>
+    </radialGradient>
+    <radialGradient id="og-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#6D5BFF" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#6D5BFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0A0A0A"/>
+  <rect width="1200" height="630" fill="url(#og-bg)"/>
+  <circle cx="900" cy="200" r="300" fill="url(#og-glow)"/>
+
+  <!-- faint grid -->
+  <g stroke="#F2F0ED" stroke-width="1" opacity=".05">
+    <line x1="0" y1="158" x2="1200" y2="158"/>
+    <line x1="0" y1="316" x2="1200" y2="316"/>
+    <line x1="0" y1="474" x2="1200" y2="474"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+  </g>
+
+  <!-- mark -->
+  <g transform="translate(80 80)">
+    <path d="M0 34V0M0 17.6l22-23.6M0 18.6l25 20.4"
+          stroke="#6D5BFF" stroke-width="3.4" stroke-linecap="square" fill="none"/>
+  </g>
+
+  <text x="80" y="330" font-family="Syne, Inter, sans-serif" font-size="104" font-weight="800"
+        letter-spacing="-4" fill="#F2F0ED">Kai Voss</text>
+
+  <text x="80" y="392" font-family="Inter, sans-serif" font-size="30" fill="#A5A3A0">
+    Interfaces, 3D experiences and the systems underneath them.
+  </text>
+
+  <line x1="80" y1="450" x2="1120" y2="450" stroke="#F2F0ED" stroke-width="1" opacity=".14"/>
+
+  <g font-family="JetBrains Mono, monospace" font-size="19" letter-spacing="4" fill="#6B6A70">
+    <text x="80" y="502">CREATIVE TECHNOLOGIST</text>
+    <text x="1120" y="502" text-anchor="end">KAIVOSS.DEV</text>
+  </g>
+
+  <g stroke="#F2F0ED" stroke-width="1.5" opacity=".2" fill="none">
+    <path d="M80 40V24h16"/>
+    <path d="M1104 24h16v16"/>
+    <path d="M1120 590v16h-16"/>
+    <path d="M96 606H80v-16"/>
+  </g>
+</svg>

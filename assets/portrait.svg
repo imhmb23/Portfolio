@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640" role="img" aria-label="Abstract portrait placeholder">
+  <defs>
+    <clipPath id="round"><circle cx="320" cy="320" r="320"/></clipPath>
+    <mask id="bust">
+      <rect width="640" height="640" fill="#000"/>
+      <circle cx="320" cy="248" r="103" fill="#fff"/>
+      <path d="M108 640c14-172 108-250 212-250s198 78 212 250z" fill="#fff"/>
+    </mask>
+    <radialGradient id="amb" cx="50%" cy="34%" r="62%">
+      <stop offset="0" stop-color="#1A1636"/>
+      <stop offset="1" stop-color="#08080A"/>
+    </radialGradient>
+  </defs>
+
+  <g clip-path="url(#round)">
+    <rect width="640" height="640" fill="url(#amb)"/>
+    <circle cx="320" cy="248" r="150" fill="#6D5BFF" opacity=".16"/>
+    <circle cx="320" cy="248" r="96"  fill="#8E82FF" opacity=".14"/>
+
+    <!-- scanline bust -->
+    <g mask="url(#bust)" stroke-linecap="butt">
+      <g stroke="#C6BEFF" stroke-width="3">
+        <line x1="0" y1="30"  x2="640" y2="30"  opacity=".05"/>
+        <line x1="0" y1="44"  x2="640" y2="44"  opacity=".07"/>
+        <line x1="0" y1="58"  x2="640" y2="58"  opacity=".09"/>
+        <line x1="0" y1="72"  x2="640" y2="72"  opacity=".12"/>
+        <line x1="0" y1="86"  x2="640" y2="86"  opacity=".15"/>
+        <line x1="0" y1="100" x2="640" y2="100" opacity=".19"/>
+        <line x1="0" y1="114" x2="640" y2="114" opacity=".24"/>
+        <line x1="0" y1="128" x2="640" y2="128" opacity=".30"/>
+        <line x1="0" y1="142" x2="640" y2="142" opacity=".36"/>
+        <line x1="0" y1="156" x2="640" y2="156" opacity=".43"/>
+        <line x1="0" y1="170" x2="640" y2="170" opacity=".50"/>
+        <line x1="0" y1="184" x2="640" y2="184" opacity=".57"/>
+        <line x1="0" y1="198" x2="640" y2="198" opacity=".64"/>
+        <line x1="0" y1="212" x2="640" y2="212" opacity=".71"/>
+        <line x1="0" y1="226" x2="640" y2="226" opacity=".77"/>
+        <line x1="0" y1="240" x2="640" y2="240" opacity=".83"/>
+        <line x1="0" y1="254" x2="640" y2="254" opacity=".88"/>
+        <line x1="0" y1="268" x2="640" y2="268" opacity=".92"/>
+        <line x1="0" y1="282" x2="640" y2="282" opacity=".95"/>
+        <line x1="0" y1="296" x2="640" y2="296" opacity=".97"/>
+        <line x1="0" y1="310" x2="640" y2="310" opacity=".98"/>
+        <line x1="0" y1="324" x2="640" y2="324" opacity=".98"/>
+        <line x1="0" y1="338" x2="640" y2="338" opacity=".97"/>
+        <line x1="0" y1="352" x2="640" y2="352" opacity=".95"/>
+        <line x1="0" y1="366" x2="640" y2="366" opacity=".92"/>
+        <line x1="0" y1="380" x2="640" y2="380" opacity=".88"/>
+        <line x1="0" y1="394" x2="640" y2="394" opacity=".84"/>
+        <line x1="0" y1="408" x2="640" y2="408" opacity=".79"/>
+        <line x1="0" y1="422" x2="640" y2="422" opacity=".74"/>
+        <line x1="0" y1="436" x2="640" y2="436" opacity=".69"/>
+        <line x1="0" y1="450" x2="640" y2="450" opacity=".64"/>
+        <line x1="0" y1="464" x2="640" y2="464" opacity=".59"/>
+        <line x1="0" y1="478" x2="640" y2="478" opacity=".54"/>
+        <line x1="0" y1="492" x2="640" y2="492" opacity=".49"/>
+        <line x1="0" y1="506" x2="640" y2="506" opacity=".44"/>
+        <line x1="0" y1="520" x2="640" y2="520" opacity=".40"/>
+        <line x1="0" y1="534" x2="640" y2="534" opacity=".36"/>
+        <line x1="0" y1="548" x2="640" y2="548" opacity=".32"/>
+        <line x1="0" y1="562" x2="640" y2="562" opacity=".28"/>
+        <line x1="0" y1="576" x2="640" y2="576" opacity=".24"/>
+        <line x1="0" y1="590" x2="640" y2="590" opacity=".20"/>
+        <line x1="0" y1="604" x2="640" y2="604" opacity=".16"/>
+        <line x1="0" y1="618" x2="640" y2="618" opacity=".12"/>
+        <line x1="0" y1="632" x2="640" y2="632" opacity=".08"/>
+      </g>
+      <!-- cyan sweep across the crown -->
+      <g stroke="#46E3DC" stroke-width="3">
+        <line x1="0" y1="184" x2="640" y2="184" opacity=".34"/>
+        <line x1="0" y1="198" x2="640" y2="198" opacity=".46"/>
+        <line x1="0" y1="212" x2="640" y2="212" opacity=".30"/>
+      </g>
+    </g>
+
+    <!-- measurement marks -->
+    <g stroke="#F2F0ED" stroke-width="1" opacity=".13">
+      <line x1="40" y1="320" x2="76" y2="320"/>
+      <line x1="564" y1="320" x2="600" y2="320"/>
+      <line x1="320" y1="40" x2="320" y2="70"/>
+      <line x1="320" y1="570" x2="320" y2="600"/>
+    </g>
+    <circle cx="320" cy="320" r="272" fill="none" stroke="#F2F0ED" stroke-width="1" opacity=".08"/>
+  </g>
+</svg>

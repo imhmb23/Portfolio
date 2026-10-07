@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Fieldnote — topographic contour study">
+  <defs>
+    <radialGradient id="f-bg" cx="48%" cy="50%" r="64%">
+      <stop offset="0" stop-color="#141130"/>
+      <stop offset="1" stop-color="#0A0A0C"/>
+    </radialGradient>
+    <mask id="f-fade">
+      <radialGradient id="f-mg" cx="48%" cy="50%" r="56%">
+        <stop offset="0"   stop-color="#fff"/>
+        <stop offset=".78" stop-color="#fff" stop-opacity=".55"/>
+        <stop offset="1"   stop-color="#000"/>
+      </radialGradient>
+      <rect width="1600" height="1000" fill="url(#f-mg)"/>
+    </mask>
+    <!-- one contour, reused at descending scale to nest cleanly -->
+    <path id="f-c" d="M0-182C78-196 158-142 178-58C198 26 142 118 52 152C-38 186-142 150-176 62C-210-26-166-140-72-172C-46-181-22-179 0-182Z"/>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#0B0B0D"/>
+  <rect width="1600" height="1000" fill="url(#f-bg)"/>
+
+  <g mask="url(#f-fade)">
+    <g transform="translate(690 500)" fill="none" stroke="#8E82FF" stroke-width="1.1">
+      <use href="#f-c" transform="scale(1.02) rotate(-6)"  opacity=".12"/>
+      <use href="#f-c" transform="scale(.92) rotate(3)"    opacity=".17"/>
+      <use href="#f-c" transform="scale(.82) rotate(-11)"  opacity=".22"/>
+      <use href="#f-c" transform="scale(.72) rotate(6)"    opacity=".28"/>
+      <use href="#f-c" transform="scale(.62) rotate(-4)"   opacity=".34"/>
+      <use href="#f-c" transform="scale(.52) rotate(12)"   opacity=".40"/>
+      <use href="#f-c" transform="scale(.42) rotate(-8)"   opacity=".47"/>
+      <use href="#f-c" transform="scale(.32) rotate(2)"    opacity=".55"/>
+      <use href="#f-c" transform="scale(.22) rotate(-14)"  opacity=".64"/>
+      <use href="#f-c" transform="scale(.12) rotate(9)"    opacity=".74"/>
+    </g>
+
+    <!-- secondary peak, lower right -->
+    <g transform="translate(1210 740)" fill="none" stroke="#46E3DC" opacity=".3">
+      <use href="#f-c" transform="scale(.30)"/>
+      <use href="#f-c" transform="scale(.21)"/>
+      <use href="#f-c" transform="scale(.12)"/>
+      <use href="#f-c" transform="scale(.05)"/>
+    </g>
+  </g>
+
+  <!-- summit markers -->
+  <g fill="#F2F0ED">
+    <circle cx="690" cy="500" r="4.5"/>
+    <path d="M690 500v-46M690 500h46" stroke="#F2F0ED" stroke-width="1" opacity=".4" fill="none"/>
+  </g>
+  <circle cx="1210" cy="740" r="3" fill="#46E3DC"/>
+
+  <g font-family="monospace" font-size="15" letter-spacing="4" fill="#F2F0ED" opacity=".32">
+    <text x="744" y="462">+2 480 m</text>
+    <text x="1240" y="712">+1 190 m</text>
+  </g>
+
+  <g stroke="#F2F0ED" stroke-width="1.2" opacity=".16" fill="none">
+    <path d="M40 74V40h34"/><path d="M1526 40h34v34"/>
+    <path d="M1560 926v34h-34"/><path d="M74 960H40v-34"/>
+  </g>
+  <g font-family="monospace" font-size="15" letter-spacing="4" fill="#F2F0ED" opacity=".32">
+    <text x="40" y="944">FIG. 002</text>
+    <text x="1358" y="76">CONTOUR / 1:5000</text>
+  </g>
+</svg>
